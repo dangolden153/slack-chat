@@ -32,7 +32,7 @@ const AppPage =({currentUser,currentChannel})=>{
 }
 const mapStateToProps =state =>({
     currentUser: state.user.currentUser,
-    currentChannel: state.channel.currentChannel,
+    currentChannel: state.channel.setCurrentChannel,
 
 })
 

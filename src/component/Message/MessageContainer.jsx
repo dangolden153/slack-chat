@@ -94,23 +94,24 @@ class MessageContainer extends Component{
         const {usersRef, user,channel} =this.state
         if(this.state.isStarredChannel ){
             console.log('starred')
+            console.log(channel)
             usersRef
-            .child(`${user.uid}/starred`)
+            .child(`${this.state.user.uid}/starred`)
             .update({
-                [channel.id] :{
-                    name: channel.name,
-                    details: channel.details,
+                [this.state.channel.id] :{
+                    name: this.state.channel.name,
+                    details: this.state.channel.details,
                     createdBy: {
-                        name: channel.createdBy.name,
-                        avatar: channel.createdBy.avatar
+                        name: this.state.channel.createdBy.name,
+                        avatar: this.state.channel.createdBy.avatar
                     }
                 }
              })
            
         } else{
             usersRef
-            .child(`${user.uid}/starred`)
-            .child(channel.id)
+            .child(`${this.state.user.uid}/starred`)
+            .child(this.state.channel.id)
             .remove(err=>{
                 if(err !== null){
                     console.log(err)
@@ -130,6 +131,7 @@ class MessageContainer extends Component{
         const {numUniqueUsers,searchResult,searchTerm,isStarredChannel} = this.state
 
         return(
+            <React.Fragment>
             <Messages
             numUniqueUsers={numUniqueUsers}
             handleSearch={this.handleSearch}
@@ -138,6 +140,8 @@ class MessageContainer extends Component{
             handleStarred={this.handleStarred}
             isStarredChannel={isStarredChannel}
             />
+            <div>{console.log(this.props.currentChannel)}</div>
+            </React.Fragment>
         )
     }
 } 
