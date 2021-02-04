@@ -1,0 +1,18 @@
+.colorContainer {
+    position: relative;
+    overflow: hidden;
+    width: 35px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.colorSqaure {
+    width: 35px;
+    height: 35px;
+}
+
+.colorOverLay {
+    height: 85px;
+    width: 35px;
+    transform: rotate(225deg);
+}

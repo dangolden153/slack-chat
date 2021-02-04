@@ -9,12 +9,20 @@ import {connect} from 'react-redux'
 
 import './appPage.css'
 
-const AppPage =({currentUser,currentChannel})=>{
+const AppPage =({currentUser,currentChannel,privateChannel,setPrimaryColor,
+    setUsersPost,setSecondaryColor})=>{
 
     return(
-        <Grid columns='equal' className="appContainer" >
-            <ColorPanel/>
-            <SidePanel/>
+        <Grid columns='equal' className="appContainer"  style={{background: setSecondaryColor}}>
+
+            <ColorPanel
+            key={currentUser && currentUser.id}
+            currentUser={currentUser}
+            />
+
+            <SidePanel
+            setPrimaryColor={setPrimaryColor}
+            />
 
             <Grid.Column style={{marginLeft: 320}}>
             <MessageContainer 
@@ -25,7 +33,13 @@ const AppPage =({currentUser,currentChannel})=>{
             </Grid.Column>
             
            <Grid.Column width={4}>
-            <MetaPanel/>
+            <MetaPanel
+            key={currentChannel && currentChannel.id}
+            currentChannel={currentChannel}
+            privateChannel={privateChannel}
+            currentUser={currentUser}
+            setUsersPost={setUsersPost}
+            />
             </Grid.Column>
         </Grid>
     )
@@ -33,7 +47,11 @@ const AppPage =({currentUser,currentChannel})=>{
 const mapStateToProps =state =>({
     currentUser: state.user.currentUser,
     currentChannel: state.channel.setCurrentChannel,
-
+    privateChannel: state.channel.privateChannel,
+    setUsersPost: state.channel.setUsersPost,
+    setPrimaryColor: state.channel.setPrimaryColor,
+    setSecondaryColor: state.channel.setSecondaryColor,
+    
 })
 
 export default connect(mapStateToProps) (AppPage)

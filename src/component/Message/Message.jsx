@@ -5,62 +5,108 @@ import MessageHeader from './messageHeader'
 import MessageChats from './messageChats'
 import {connect} from 'react-redux'
 import firebase from '../firebase'
-
+import FileUpload from './fileUpload'
 import './message.css'
 
-const Messages =({currentUser,privateChannel, currentChannel,
-    numUniqueUsers,handleSearch,searchResult,searchTerm,isStarredChannel,handleStarred})=>{
+const Messages =({currentUser,privateChannel, currentChannel,usersRef,
+    numUniqueUsers,handleSearch,searchResult,searchTerm})=>{
 
 
     const [messageRef, setMessageRef] = useState(firebase.database().ref('message'))
     const [privateMessageRef, setPrivateMessageRef] = useState(firebase.database().ref('privateMessage'))
-    // const [userRef, setUserRef] = useState(firebase.database().ref('user'))
-    // const [isStarredChannel, setIsStarredChannel] = useState(false)
+     const [userRef, setUserRef] = useState(firebase.database().ref('user'))
+    const [isStarredChannel, setIsStarredChannel] = useState(false)
 
+    useEffect(()=>{
+        if (currentChannel && currentUser){
+        addUserStarredListner(currentChannel.id,currentUser.uid)
+   } },[currentChannel,currentUser])
+    
 
 
     const channalName =currentChannel=>currentChannel ?
-     `${privateChannel ? '@' : ''}${currentChannel.name}` : "" 
+     `${privateChannel ? '@' : '#'}${currentChannel.name}` : "" 
     
 
      const getMessagesRef= ()=>{
         return privateChannel ? privateMessageRef : messageRef
     }
 
-    // const handleStarred =()=>{
-    //     setIsStarredChannel(!isStarredChannel)
-    //     StarredChannel()
-    // }
+   
+   const handleSearchMessage=()=>{
+        const channelMessages = [...this.state.messages]
+        const regrex = new RegExp(this.state.searchTerm, 'gi');
+        const searchResult = channelMessages.reduce((acc, message)=>{
+            if (message.contents && message.contents.match(regrex)){
+                acc.push(message)
+            }
+            return acc
+        },[])
+        console.log(searchResult,"search term")
+        this.setState({searchResult})
+    }
 
-    // const StarredChannel =()=>{
-    //     if(isStarredChannel ){
-    //         console.log('starred')
-    //         userRef.child(`${currentUser.uid}/starred`)
-    //         .update({
-    //             [currentChannel.id] :{
-    //                 name: currentChannel.name,
-    //                 details: currentChannel.details,
-    //                 createdBy: {
-    //                     name: currentChannel.createdBy.name,
-    //                     avatar: currentChannel.createdBy.avatar
-    //                 }
-    //             }
-    //          })
+
+
+    const handleStarred =()=>{
+        setIsStarredChannel(!isStarredChannel )
+       StarredChannel()
+        
+    }
+
+   const StarredChannel =()=>{
+     
+        if(isStarredChannel ){
            
-    //     } else{
-    //         userRef
-    //         .child(`${currentUser.uid}/starred`)
-    //         .child(currentChannel.id)
-    //         .remove(err=>{
-    //             if(err !== null){
-    //                 console.log(err)
-    //             }
-    //         })
+            usersRef
+            .child(`${currentUser.uid}/starred`)
+            .child(currentChannel.id)
+            .remove(err=>{
+                if(err !== null){
+                    console.log(err)
+                }
+            })
 
-    //         console.log('not starred')
-    //     }
-    // }
+            console.log('not starred')
 
+           
+        } else{
+            console.log('starred')
+            usersRef
+            .child(`${currentUser.uid}/starred`)
+            .update({
+                [currentChannel.id] :{
+                    name: currentChannel.name,
+                    details:currentChannel.details,
+                    createdBy: {
+                        name: currentChannel.createdBy.name,
+                        avatar: currentChannel.createdBy.avatar
+                    }
+                }
+             })
+        }
+    }
+
+
+
+    const addUserStarredListner=(channelId, userId)=>{
+        userRef
+        .child(userId)
+        .child('starred')
+        .once('value')
+        .then(data =>{
+            if(data.val() !== null){
+                const channelIds = Object.keys(data.val())
+                const prevStarred = channelIds.includes(channelId)
+               setIsStarredChannel( prevStarred)
+            }
+        })
+        
+    }
+
+
+
+  
    
     return (
         <React.Fragment>
@@ -84,18 +130,25 @@ const Messages =({currentUser,privateChannel, currentChannel,
                 searchTerm={searchTerm}
                 privateMessageRef={privateMessageRef}
                 privateChannel={privateChannel}
+                isStarredChannel={isStarredChannel}
+                usersRef={usersRef}
                 />
              
                
                 </Comment.Group>
             </Segment>
 
+            
             <MessageForm
             channel={currentChannel}
             user={currentUser}
             messageRef={messageRef}
             getMessagesRef={getMessagesRef}
+            messageRef={messageRef}
             />
+
+            <div></div>
+
         </React.Fragment>
     )
     }

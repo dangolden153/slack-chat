@@ -6,7 +6,7 @@ import Channels from './channels'
 import DirectMessage from './DirectMessage'
 import StarredChannel from './starred'
 
-const SidePanel =({currentUser})=>{
+const SidePanel =({currentUser,setPrimaryColor})=>{
     
     return (
         <Menu
@@ -14,10 +14,10 @@ const SidePanel =({currentUser})=>{
         size='large'
         inverted
         fixed='left'
-        style={{background: '#4c3c4c', fontSize: '1.2rem'}}
+        style={{background: setPrimaryColor, fontSize: '1.2rem'}}
         >
             <UserPanel/>
-            <StarredChannel/>
+            <StarredChannel currentUser={currentUser}/>
             <Channels currentUser={currentUser}/>
             <DirectMessage currentUser={currentUser}/>
 

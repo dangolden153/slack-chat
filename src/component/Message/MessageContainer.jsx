@@ -1,7 +1,7 @@
-import React,{Component} from 'react'
+import React,{Component,useState} from 'react'
 import {Comment,Menu} from 'semantic-ui-react'
 import firebase from '../firebase'
-import {numberOfUsers} from '../../redux/userReducer/user.action'
+import {setUserPosts} from '../../redux/channelReducer/channelReducer.action'
 import {connect} from 'react-redux'
 import Messages from './Message'
 
@@ -41,8 +41,27 @@ class MessageContainer extends Component{
             
             this.setState({messages: loadedMessages, messageIsLoading: false })
             this.uniqueUsers(loadedMessages)
+            this.usersPost(loadedMessages)
         })
     } 
+
+    usersPost= message =>{
+        let countUsersPost = message.reduce((acc, message)=>{
+            if(message.users.name in acc){
+                acc[message.users.name].count +=1
+
+            } else {
+                acc[message.users.name] = {
+                    avatar : message.users.avatar,
+                    count : 1
+                }
+            }
+
+            return acc;
+        },{})
+
+        this.props.setUserPosts(countUsersPost)
+    }
 
     uniqueUsers = message=>{
         const countUsers = message.reduce((acc, message)=>{
@@ -54,7 +73,7 @@ class MessageContainer extends Component{
         },[])
 
         const plural = countUsers.length > 1 || countUsers.length === 0 
-        const numUniqueUsers = `#${countUsers.length} user${plural ? 's' : ''}`
+        const numUniqueUsers = `${countUsers.length} user${plural ? 's' : ''}`
         this.setState({numUniqueUsers})
         
     }
@@ -69,66 +88,9 @@ class MessageContainer extends Component{
         console.log(this.state.searchTerm)
     }
    
-    handleSearchMessage=()=>{
-        const channelMessages = [...this.state.messages]
-        const regrex = new RegExp(this.state.searchTerm, 'gi');
-        const searchResult = channelMessages.reduce((acc, message)=>{
-            if (message.contents && message.contents.match(regrex)){
-                acc.push(message)
-            }
-            return acc
-        },[])
-        console.log(searchResult,"search term")
-        this.setState({searchResult})
-    }
-
-
-
-     handleStarred =()=>{
-        this.setState( prev =>({
-            isStarredChannel: !prev.isStarredChannel}),()=>this.StarredChannel())
-        
-    }
-
-     StarredChannel =()=>{
-        const {usersRef, user,channel} =this.state
-        if(this.state.isStarredChannel ){
-            console.log('starred')
-            console.log(channel)
-            usersRef
-            .child(`${this.state.user.uid}/starred`)
-            .update({
-                [this.state.channel.id] :{
-                    name: this.state.channel.name,
-                    details: this.state.channel.details,
-                    createdBy: {
-                        name: this.state.channel.createdBy.name,
-                        avatar: this.state.channel.createdBy.avatar
-                    }
-                }
-             })
-           
-        } else{
-            usersRef
-            .child(`${this.state.user.uid}/starred`)
-            .child(this.state.channel.id)
-            .remove(err=>{
-                if(err !== null){
-                    console.log(err)
-                }
-            })
-
-            console.log('not starred')
-        }
-    }
-
-
-
-
-
     render(){
 
-        const {numUniqueUsers,searchResult,searchTerm,isStarredChannel} = this.state
+        const {numUniqueUsers,searchResult,searchTerm,isStarredChannel,usersRef } = this.state
 
         return(
             <React.Fragment>
@@ -138,9 +100,8 @@ class MessageContainer extends Component{
             searchTerm={searchTerm}
             searchResult={searchResult}
             handleStarred={this.handleStarred}
-            isStarredChannel={isStarredChannel}
+            usersRef={usersRef}
             />
-            <div>{console.log(this.props.currentChannel)}</div>
             </React.Fragment>
         )
     }
@@ -148,4 +109,4 @@ class MessageContainer extends Component{
 
 
 
-export default (MessageContainer)
+export default connect(null, {setUserPosts})(MessageContainer)

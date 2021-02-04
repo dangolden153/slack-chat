@@ -59,8 +59,6 @@ class ChannelItem extends Component{
                 lastKnownTotal: snap.numChildren(),
                 count: 0
             })
-
-            console.log(notifications)
         }
         
         this.setState({notifications: notifications})

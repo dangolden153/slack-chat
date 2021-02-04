@@ -20,8 +20,6 @@ class MessageChats extends Component{
     }
 
     componentDidMount(){
-        
-
         if(this.props.currentChannel && this.props.user){
         this.addListener(this.props.currentChannel.id)
     }}
@@ -35,6 +33,7 @@ class MessageChats extends Component{
         const ref = this.getMessagesRef()
         ref.child(channelId).on("child_added", snap=>{
         loadedMessages.push(snap.val())
+        console.log(loadedMessages)
         this.setState({messages: loadedMessages, messageIsLoading: false })
         })
     } 
@@ -44,18 +43,6 @@ class MessageChats extends Component{
         return privateChannel ? privateMessageRef : messageRef
     }
 
-
-
-//    displayMessages=messages=> {
-//        const {user} = this.state
-//        messages.length > 0 && messages.map(message=>( 
-//         <MessageChatsItems
-//         //  searchTerm={searchTerm} 
-//         //  searchResult={searchResult}
-//          key={message.timeStamp}  
-//          user={user}  
-//          message={message} />))}
-   
 
     render(){
 
@@ -76,7 +63,7 @@ class MessageChats extends Component{
          message={message} />))}
              
             </Comment>
-
+            
             </React.Fragment>
         )
     }

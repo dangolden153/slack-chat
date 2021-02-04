@@ -19,9 +19,16 @@ z-index: 200;
 .message_self{
     border-left: 2px solid orange;
     padding-left: 8px;
+    padding-top: 2.5em;
     
 }
 
 .menu{
     padding-bottom: 1em;
+}
+
+.message_image{
+    padding: 1em;
+    height: 22rem;
+    width: 23rem;
 }
