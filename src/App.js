@@ -27,7 +27,7 @@ const App =({currentUser,isLoading,clearUser})=>{
 
       } else {
         clearUser()
-        history.push('/login')
+        history.push('/')
       }
     })
   },[])
@@ -37,9 +37,10 @@ const App =({currentUser,isLoading,clearUser})=>{
     {
       isLoading ? <Spinner/> :
     <Switch>
+    <Route path='/' exact component={Login} />
     <Route path='/app-page'  component={AppPage} />
     <Route path='/register'  component={Register} />
-    <Route path='/login' exact component={Login} />
+    
 
     </Switch>}
   </div>
