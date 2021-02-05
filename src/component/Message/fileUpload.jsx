@@ -59,7 +59,7 @@ class FileUpload extends Component{
         .catch(err => console.log(err))
     }
 
-    
+
 
     render(){
         const {modal,closeModal} = this.props
@@ -71,6 +71,7 @@ class FileUpload extends Component{
                 closeModal={closeModal}
                 uploadFile={this.uploadFile}
                 />
+               { console.log(this.props.user)}
             </div>
         )
     }

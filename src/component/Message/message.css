@@ -1,6 +1,6 @@
 .message_messg{
-height: 320px;
-overflow-y: scroll;
+    height: 524px;
+    overflow-y: scroll;
 }
 
 .message_header{

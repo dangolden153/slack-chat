@@ -145,6 +145,7 @@ const MessageForm =({channel,user,messageRef,getMessagesRef})=>{
                 creatMessage ={creatMessage}
                 channel={channel}
                 messageRef={messageRef}
+                user={user}
                 />
                 {/* <FileModal 
                 modal={modal}

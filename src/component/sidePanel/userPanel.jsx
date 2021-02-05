@@ -1,12 +1,20 @@
-import React,{useEffect, useState} from 'react'
-import {Grid, Header,Icon, Dropdown, Image} from 'semantic-ui-react'
+import React,{useEffect, useState, useRef} from 'react'
+import {Grid, Header,Icon, Dropdown, Image,Modal, Button, Input} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import firebase from '../firebase'
+import DpModalFile from './dpModalFile'
 
 const UserPanel =({currentUser})=>{
 
     const [user, setUser] = useState();
     const [userImg, setUserImg] = useState();
+    const [modal, setModal] = useState(false);
+    
+    const [storageRef, setStorage] = useState(firebase.storage().ref())
+    const [userRef, setref] = useState(firebase.database().ref('user'))
+    
+    const openModal =()=> setModal(true)
+    const closeModal =()=> setModal(false)
         
         useEffect(()=>{
             setUser(currentUser.displayName)
@@ -31,7 +39,7 @@ const UserPanel =({currentUser})=>{
 
         {
             key: 'avatar',
-            text: <span>change Avatar</span>,
+            text: <span onClick={openModal}>change Avatar</span>,
             
         },
 
@@ -42,7 +50,73 @@ const UserPanel =({currentUser})=>{
         },
     ]
 
+    // const handleChange=event=>{
+    //     const file = event.target.files[0]
+    //     const reader = new FileReader()
+
+    //     if (file){
+    //         reader.readAsDataURL(file)
+    //         reader.addEventListener('load', ()=>{
+    //             setPreviewImage(reader.result)
+    //             console.log(reader.result)
+    //         })
+    //     }
+    // }
+
+    // const uploadImage =()=>{
+    //     storageRef
+    //     .child(`avatars/user-${currentUser.uid}`)
+    //     .put(previewImage, metaData)
+    //     .then(snap => {
+    //         snap.ref.getDownloadURL().then(downloadUrl =>{
+    //             setUploadSetImage(downloadUrl, ()=>{
+    //                 chnageImage()
+    //             } )
+    //         })
+    //     })
+    // }
+
+    // const chnageImage =()=>{
+    //     currentUser
+    //     .updateProfile({
+    //        photoURL: uploadSetImage 
+    //     })
+    //     .then(()=>console.log('image uploaded sucessful'))
+    //     .catch(err => console.log(err))
+
+    //     userRef
+    //     .child(currentUser.uid)
+    //     .update({
+    //         avatar: uploadSetImage
+    //     })
+    //     .then(()=>console.log('still on image uploaded sucessful'))
+    //     .catch(err => console.log(err))
+    // }
+
+    // const handleCroppedImage =()=>{
+    //     if(avatarEditior){
+    //         g
+    //         })
+    //     }
+    // }
+
+    // avatarEditior.getImageScaledToCanvas().toBlob(blob =>{
+    //     let imageUrl = URL.createObjectURL(blob)
+    //     setcropImage(imageUrl)
+    //     setBlob(blob)
     
+
+
+
+
+
+
+
+
+
+
+
+
 
     return(
         <Grid>
@@ -64,6 +138,16 @@ const UserPanel =({currentUser})=>{
 
                 </Header>
             </Grid.Row>
+
+            <DpModalFile
+            modal={modal}
+            closeModal={closeModal}
+            userRef={userRef}
+            currentUser={currentUser}
+            storageRef={storageRef}
+            />
+
+           
 
 
 
