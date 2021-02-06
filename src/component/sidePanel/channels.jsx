@@ -4,7 +4,7 @@ import firebase from '../firebase'
 import {Menu,Icon,Modal,Input,Form,Header,Button} from 'semantic-ui-react'
 
 
-const Channels =({currentUser})=>{
+const Channels =({currentUser,currentChannel})=>{
     useEffect(()=>{
         addListener()
        
@@ -17,8 +17,8 @@ const Channels =({currentUser})=>{
     const [description, setDescription] = useState('')
     const [loadedChannel, setLoadedChannel] = useState([])
 
-    const userName= currentUser.displayName
-    const userPicture= currentUser.photoURL
+    // const userName= 
+    // const userPicture= 
     
     
    
@@ -48,8 +48,8 @@ const Channels =({currentUser})=>{
             name: name,
             details: description,
             createdBy: {
-            name: userName,
-            avatar: userPicture,
+            name: currentUser.displayName,
+            avatar: currentUser.photoURL,
             }
         }
 
@@ -87,7 +87,10 @@ const Channels =({currentUser})=>{
             </Menu.Item>
 
         <Menu.Item>
-            <ChannelItem  />
+            <ChannelItem 
+            currentChannel={currentChannel}
+            currentUser={currentUser}
+             />
         </Menu.Item>
         </Menu.Menu>
 

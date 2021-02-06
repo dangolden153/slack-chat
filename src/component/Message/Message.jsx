@@ -110,7 +110,7 @@ const Messages =({currentUser,privateChannel, currentChannel,usersRef,
    
     return (
         <React.Fragment>
-            <MessageHeader
+            <MessageHeader className='message__header'
             channalName={channalName(currentChannel)}
             numUniqueUsers={numUniqueUsers}
             handleSearch={handleSearch}
@@ -119,9 +119,9 @@ const Messages =({currentUser,privateChannel, currentChannel,usersRef,
             isStarredChannel={isStarredChannel}
             />
 
-            <Segment>
+            <Segment className='message__chat'>
                 <Comment.Group className="message_messg">
-                <MessageChats
+                <MessageChats  
                 key={currentChannel && currentChannel.id}
                 currentChannel={currentChannel}
                 user={currentUser} 
@@ -139,12 +139,14 @@ const Messages =({currentUser,privateChannel, currentChannel,usersRef,
             </Segment>
 
             
-            <MessageForm
+            <MessageForm className='message__form'
             channel={currentChannel}
             user={currentUser}
             messageRef={messageRef}
             getMessagesRef={getMessagesRef}
             messageRef={messageRef}
+            privateChannel={privateChannel}
+            privateMessageRef={privateMessageRef}
             />
 
             <div></div>

@@ -23,11 +23,11 @@ const App =({currentUser,isLoading,clearUser})=>{
     .auth().onAuthStateChanged(user =>{
       if (user){
         currentUser(user)
-        history.push('/app-page')
+        history.push('/')
 
       } else {
         clearUser()
-        history.push('/')
+        history.push('/login')
       }
     })
   },[])
@@ -37,8 +37,8 @@ const App =({currentUser,isLoading,clearUser})=>{
     {
       isLoading ? <Spinner/> :
     <Switch>
-    <Route path='/' exact component={Login} />
-    <Route path='/app-page'  component={AppPage} />
+      <Route path='/' exact component={AppPage} />
+    <Route path='/login'  component={Login} />
     <Route path='/register'  component={Register} />
     
 

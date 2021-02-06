@@ -17,10 +17,13 @@ const UserPanel =({currentUser})=>{
     const closeModal =()=> setModal(false)
         
         useEffect(()=>{
-            setUser(currentUser.displayName)
-            setUserImg(currentUser.photoURL)
+            if(currentUser){
+                setUser(currentUser.displayName)
+                setUserImg(currentUser.photoURL)
+            }
+           
             
-        },[])
+        },[currentUser])
 
     
 

@@ -4,12 +4,14 @@ import FileModal from './fileModal'
 import firebase from '../firebase'
 import FileUpload from './fileUpload'
 
-const MessageForm =({channel,user,messageRef,getMessagesRef})=>{
+const MessageForm =({channel,user,messageRef,getMessagesRef,privateChannel,
+    privateMessageRef})=>{
 
     const [message, setMessage] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState([])
     const [modal, setModal] = useState(false)
+    const [typingRef, settypingRef] = useState(firebase.database().ref('typing'))
     
 
     const openModal=()=> setModal(true)
@@ -36,6 +38,23 @@ const MessageForm =({channel,user,messageRef,getMessagesRef})=>{
         return messages
     }
 
+
+    const handleKeyDown=()=>{
+        if (message){
+            typingRef
+            .child(channel.id)
+            .child(user.uid)
+            .set(user.displayName)
+
+        }  else {
+            typingRef
+            .child(channel.id)
+            .child(user.uid)
+            .remove()
+        }
+    }
+
+
     const submitMessage=()=>{
 
         setIsLoading(true)
@@ -46,9 +65,12 @@ const MessageForm =({channel,user,messageRef,getMessagesRef})=>{
             .set(creatMessage())
 
             .then(()=> {
-                console.log(message)
                 setIsLoading(false)
                 setMessage('')
+                typingRef
+                .child(channel.id)
+                .child(user.uid)
+                .remove()
 
             }) .catch(err => {
                 console.log(err)
@@ -60,44 +82,6 @@ const MessageForm =({channel,user,messageRef,getMessagesRef})=>{
             setError({message: 'add a message'})
         }
     }
-
-
-    // const uploadFile=(file, metaData)=>{
-    //     const pathToUpload = channel.id
-    //     const ref = messageRef
-    //     const pathFIle = `chat/public${uuidv4()}.jpg`
-    //     setUploadState('uploading')
-    //     setUploadTask(storageRef.child(pathFIle).put(file,metaData))
-       
-      
-    //         uploadTask.on('state_changed', snap =>{
-    //             const percentageUpLoad = Math.round((snap.bytesTransferred / snap.totalBytes) * 100)
-    //             setpercentageUpLoad(percentageUpLoad)
-    //             })
-
-       
-           
-
-       
-    //          uploadTask.snapShot.ref.getDownloadURL() 
-    //          .then(downloadUrl => sendFile(ref,pathToUpload,downloadUrl))
-    //          .catch(err => console.log(err))
-    //      }
-        
-    
-
-    // const sendFile =(ref,pathToUpload,fileUrl)=>{
-    //     ref.child(pathToUpload)
-    //     .push()
-    //     .set(creatMessage(fileUrl))
-    //     .then(()=>{
-    //         setUploadState('done')
-    //     })
-    //     .catch(err => console.log(err))
-    // }
-
-
-
 
 
 
@@ -112,6 +96,7 @@ const MessageForm =({channel,user,messageRef,getMessagesRef})=>{
             placeholder="write your message"
             label={<Button icon="add"/>}
             name="message"
+            onKeyDown={handleKeyDown}
             fluid
             labelPosition="left"
             style={{marginBottom: '10px'}}
@@ -146,12 +131,10 @@ const MessageForm =({channel,user,messageRef,getMessagesRef})=>{
                 channel={channel}
                 messageRef={messageRef}
                 user={user}
+                privateChannel={privateChannel}
+                privateMessageRef={privateMessageRef}
                 />
-                {/* <FileModal 
-                modal={modal}
-                closeModal={closeModal}
-                uploadFile={uploadFile}
-                /> */}
+               
             </Button.Group>
         </Segment>
     )

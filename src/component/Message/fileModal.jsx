@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import {Modal,Input,Button,Icon} from 'semantic-ui-react'
 import mime from 'mime-types'
-const FileModal =({closeModal,modal,uploadFile})=>{
+const FileModal =({closeModal,modal,uploadFile,getMessagesRef})=>{
 
     const [file, setFile] =useState(null)
     const [authorized, setAuthorized] =useState(['image/jpeg', 'image/png'])
@@ -29,6 +29,13 @@ const FileModal =({closeModal,modal,uploadFile})=>{
 
     const isAuthorized = fileName =>  setAuthorized.includes(mime.lookup(fileName))
 
+
+
+
+
+
+
+    
     return(
         <Modal basic open={modal} onClose={closeModal}>
 

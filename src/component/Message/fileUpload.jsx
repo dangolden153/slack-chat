@@ -11,14 +11,26 @@ class FileUpload extends Component{
         storageRef: firebase.storage().ref(),
         messageRef: this.props.messageRef,
         channel: this.props.channel ,
+        privateChannel: this.props.privateChannel,
     }
 
-   
+    getpath=()=>{
+        if(this.props.privateChannel){
+            return `chat/private-${this.props.channel.id}`
+        } else {
+          return  `chat/public`
+        }
+    }
+
+    getMessagesRef= ()=>{
+        const {privateChannel, privateMessageRef, messageRef} = this.props
+        return privateChannel ? privateMessageRef : messageRef
+    }
 
         uploadFile=(file, metaData)=>{
         const pathToUpload = this.props.channel.id
-        const ref = this.props.messageRef
-        const pathFIle = `chat/public/${uuidv4()}.jpg`
+        const ref = this.getMessagesRef()
+        const pathFIle = `${this.getpath()}${uuidv4()}.jpg`
 
 
         this.setState({
@@ -41,7 +53,6 @@ class FileUpload extends Component{
 
 
             )
-        
         
         )
              
@@ -70,8 +81,9 @@ class FileUpload extends Component{
                 modal={modal}
                 closeModal={closeModal}
                 uploadFile={this.uploadFile}
+                getMessagesRef={this.getMessagesRef}
                 />
-               { console.log(this.props.user)}
+               
             </div>
         )
     }

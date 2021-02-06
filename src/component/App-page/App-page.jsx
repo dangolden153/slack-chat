@@ -22,6 +22,9 @@ const AppPage =({currentUser,currentChannel,privateChannel,setPrimaryColor,
 
             <SidePanel
             setPrimaryColor={setPrimaryColor}
+            key={currentUser && currentUser.name}
+            currentUser={currentUser}
+            currentChannel={currentChannel}
             />
 
             <Grid.Column style={{marginLeft: 320}}>

@@ -13,6 +13,7 @@ class ChannelItem extends Component{
         channel: null,
         messageRef: firebase.database().ref('message'),
         notifications:[],
+        typingRef:firebase.database().ref('typing')
     }
 
     
@@ -73,6 +74,10 @@ class ChannelItem extends Component{
     changeChannel=channel=>{
         this.props.setCurrentChannel(channel)
         this.setActiveChannel(channel)
+        this.state.typingRef
+        .child(this.props.currentChannel.id)
+        .child(this.props.currentUser.uid)
+        .remove()
        this.props.setPrivateChannel(false)
        this.setState({channel: channel})
        this.clearNotifications()
