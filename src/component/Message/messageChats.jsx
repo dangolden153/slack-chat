@@ -1,9 +1,9 @@
-import React,{Component} from 'react'
+import React,{Component, useRef} from 'react'
 import {Comment,Menu} from 'semantic-ui-react'
 import firebase from '../firebase'
 import MessageChatsItems from './MessageChatsItems'
 import Typing from './typing'
-
+import ChatSkeleton from './chat-skeleton/chat-skeleton'
 
 class MessageChats extends Component{
 
@@ -86,10 +86,17 @@ class MessageChats extends Component{
 
 
 
+   
 
+    componentDidUpdate(prevProps, prevState){
+        if (this.messageEnd){
+            this.scrollBottom()
+        }
+    }
 
-
-
+    scrollBottom=()=>{
+        this.messageEnd.scrollIntoView({behavior: "smooth"})
+    }
 
 
 
@@ -100,12 +107,19 @@ class MessageChats extends Component{
 
     render(){
 
-       const {messages,user,searchTerm,searchResult,typeUsers} = this.state
+       const {messages,user,searchTerm,searchResult,typeUsers, messageIsLoading} = this.state
 
         return(
             <React.Fragment>
-          
+          <div>
+          { messageIsLoading ? (<React.Fragment>
+              {[...Array(10)].map((_, i)=>(
+                  <ChatSkeleton key={i} />
+              ))}
+          </React.Fragment>) : null }  
+          </div>
             <Comment>
+             
          {
       
        messages.length > 0 && (searchTerm ? searchResult : messages).map(message=>( 
@@ -117,7 +131,7 @@ class MessageChats extends Component{
          message={message}
          
          />))}
-             
+             <div ref={node => (this.messageEnd = node)} ></div>
             </Comment>
             <div>
                 {console.log(typeUsers) }

@@ -1,8 +1,17 @@
-import React,{useState} from 'react'
+import React,{useState, useRef} from 'react'
 import {Segment, Input,Button} from 'semantic-ui-react'
 import FileModal from './fileModal'
 import firebase from '../firebase'
 import FileUpload from './fileUpload'
+import {emojiIndex, Picker} from 'emoji-mart'
+import 'emoji-mart/css/emoji-mart.css'
+
+
+
+
+
+
+
 
 const MessageForm =({channel,user,messageRef,getMessagesRef,privateChannel,
     privateMessageRef})=>{
@@ -12,8 +21,9 @@ const MessageForm =({channel,user,messageRef,getMessagesRef,privateChannel,
     const [error, setError] = useState([])
     const [modal, setModal] = useState(false)
     const [typingRef, settypingRef] = useState(firebase.database().ref('typing'))
-    
-
+    const [emojiPicker, setEmojiPicker] = useState(false)
+     
+    const messageRefInput = useRef()
     const openModal=()=> setModal(true)
     const closeModal=()=> setModal(false)
 
@@ -39,7 +49,10 @@ const MessageForm =({channel,user,messageRef,getMessagesRef,privateChannel,
     }
 
 
-    const handleKeyDown=()=>{
+    const handleKeyDown=event=>{
+        
+
+
         if (message){
             typingRef
             .child(channel.id)
@@ -55,8 +68,10 @@ const MessageForm =({channel,user,messageRef,getMessagesRef,privateChannel,
     }
 
 
-    const submitMessage=()=>{
-
+    const submitMessage=(event)=>{
+        if (event.ctrlkey && event.keyCode === 13 ){
+            
+      
         setIsLoading(true)
         if (message){
             getMessagesRef()
@@ -82,21 +97,59 @@ const MessageForm =({channel,user,messageRef,getMessagesRef,privateChannel,
             setError({message: 'add a message'})
         }
     }
+    }
 
 
+    const handleAddEmoji =(emoji)=>{
+        const oldMessage= message
+        const newMessage = colonToUnicode(` ${oldMessage} ${emoji.colons} `)
+        setMessage(newMessage)
+        setEmojiPicker(false)
+    //    setTimeout(()=> messageRefInput, 0)
+    }
+
+    const colonToUnicode = message =>{
+        return message.replace(/:[A-Za-z0-9_+-]+:/g, x=>{
+            x = x.replace(/:/g, "");
+            let emoji = emojiIndex.emojis[x];
+            if (typeof emoji !== "undefined" ){
+                let unicode = emoji.native
+
+                if(typeof unicode !== "undefined"){
+                    return unicode
+                }
+            }
+
+            x = ":" + x + ":";
+            return x
+        })
+    }
+
+    const handleToggleEmoji = emoji =>{
+        setEmojiPicker(!emojiPicker)
+    }
 
 
 
 
     return(
         <Segment className="message_form">
-
+            {emojiPicker && 
+            <Picker
+            onSelect={handleAddEmoji}
+            set="apple"
+            title='pick your emoji'
+            className='emoji_picker'
+            emoji='point_up'
+            />
+            }
 
             <Input
             placeholder="write your message"
-            label={<Button icon="add"/>}
+            label={<Button icon="smile" onClick={handleToggleEmoji}/>}
             name="message"
             onKeyDown={handleKeyDown}
+            ref={messageRefInput}
             fluid
             labelPosition="left"
             style={{marginBottom: '10px'}}

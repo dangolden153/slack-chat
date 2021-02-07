@@ -10,6 +10,7 @@
     "axios": "^0.21.0",
     "email-js": "^2.0.2",
     "emailjs-com": "^2.6.3",
+    "emoji-mart": "^3.0.0",
     "firebase": "^8.2.4",
     "framer-motion": "^3.1.1",
     "mime-type": "^4.0.0",

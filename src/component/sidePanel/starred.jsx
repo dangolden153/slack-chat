@@ -64,7 +64,7 @@ class StarredChannel extends Component{
         <Menu.Menu>
             <Menu.Item>
                 <sapn>
-                    <Icon name='star'/>STARRED
+                    <Icon name='star'/>STARRED CHANNELS
                 </sapn> {''}
                 ({starredChannel.length})
             </Menu.Item>
