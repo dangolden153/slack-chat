@@ -86,6 +86,7 @@ class DirectMessage extends Component{
             this.props.setCurrentChannel(channelData)
             this.props.setPrivateChannel(true)
             this.setState({activeChannel: user.uid})
+            this.props.toggleState()
         }
 
         getChannelId = userId =>{

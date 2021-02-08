@@ -95,3 +95,9 @@ z-index: 200;
     height: 391px;
     overflow-y: scroll;
 }
+
+@media screen and (max-width: 800px){
+    .message_image{
+        height: 17rem;
+    }
+}

@@ -39,7 +39,9 @@ const SidePanel =({currentUser,setPrimaryColor,currentChannel,
             toggleState={toggleState}
             />
 
-            <DirectMessage currentUser={currentUser}/>
+            <DirectMessage 
+            toggleState={toggleState}
+            currentUser={currentUser}/>
             
             </Comment.Group>
             </Segment>
