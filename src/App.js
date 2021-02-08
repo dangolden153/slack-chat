@@ -33,7 +33,7 @@ const App =({currentUser,isLoading,clearUser})=>{
   },[])
   
   return (
-  <div>
+  <div className="App">
     {
       isLoading ? <Spinner/> :
     <Switch>

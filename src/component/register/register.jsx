@@ -110,7 +110,7 @@ const Register = ()=>{
 
     return(
         <Grid textAlign='center' verticalAlign='middle' className='register'>
-            <Grid.Column style={{maxWidth : 450}}>
+            <Grid.Column style={{maxWidth : 450}} className='mobile_view_register'>
                 <Header as='h2' icon color='orange' textAlign='center'>
                 <Icon name='puzzle piece' color='orage' />
                  Sign up

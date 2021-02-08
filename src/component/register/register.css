@@ -5,3 +5,10 @@
     align-items: center;
     background-color: #eee;
 }
+
+@media screen and (max-width: 800px){
+    .mobile_view_register{
+        width: 80% !important;
+    }
+   
+}
