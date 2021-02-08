@@ -54,17 +54,21 @@ class StarredChannel extends Component{
         this.props.setCurrentChannel(channel)
         this.setActiveChannel(channel)
        this.props.setPrivateChannel(false)
+       this.props.toggleState()
     }
     
+
+
+
     
 
     render(){
         const {starredChannel} = this.state
     return(
         <Menu.Menu>
-            <Menu.Item>
+            <Menu.Item style={{padding: "10px"}}>
                 <sapn>
-                    <Icon name='star'/>STARRED CHANNELS
+                    <Icon name='star' onClick={this.props.toggleState}/>STARRED CHANNELS
                 </sapn> {''}
                 ({starredChannel.length})
             </Menu.Item>

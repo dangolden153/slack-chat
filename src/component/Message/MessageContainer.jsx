@@ -88,6 +88,12 @@ class MessageContainer extends Component{
         console.log(this.state.searchTerm)
     }
    
+
+
+
+
+
+
     render(){
 
         const {numUniqueUsers,searchResult,searchTerm,isStarredChannel,usersRef } = this.state
@@ -101,6 +107,8 @@ class MessageContainer extends Component{
             searchResult={searchResult}
             handleStarred={this.handleStarred}
             usersRef={usersRef}
+            toggleState={this.props.toggleState}
+            openModal={this.props.openModal}
             />
             </React.Fragment>
         )

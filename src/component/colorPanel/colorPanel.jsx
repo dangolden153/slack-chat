@@ -8,7 +8,7 @@ import firebase from '../firebase'
 import './color.css'
 
 
-const ColorPanel =({currentUser,setColors})=>{
+const ColorPanel =({currentUser,setColors,metalPanel,openMetaModal})=>{
 
     const [modal, setModal] =useState(false)
     const [primary, setPrimary] =useState('')
@@ -86,6 +86,7 @@ const ColorPanel =({currentUser,setColors})=>{
         icon="labeled"
         inverted
         >
+        <Button style={{marginTop: '30px'}} icon="user circle" color="orange" size="small" onClick={openMetaModal} />
         <Divider/>
         <Button icon="add" color="blue" size="small" onClick={openModal} />
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import {Header, Segment, Input, Icon} from 'semantic-ui-react'
 
-const MessageHeader =({channalName,numUniqueUsers
+const MessageHeader =({channalName,numUniqueUsers,openModal,toggleState
     ,handleSearch,privateChannel,isStarredChannel, handleStarred})=>{
 
        
@@ -9,7 +9,13 @@ const MessageHeader =({channalName,numUniqueUsers
         <Segment clearing className="message_header">
 
             <Header fluid="true" floated="left" as="h2" style={{marginBottom:"0" }} >
-                <span>
+           
+            
+         <div style={{display: 'flex'}}>
+         <span className="media_ArrowIcon" floated="left">
+         <Icon name='arrow left'   onClick={toggleState}/>
+          </span>
+            
             {channalName}
            
            {!privateChannel && <Icon 
@@ -17,19 +23,19 @@ const MessageHeader =({channalName,numUniqueUsers
            name={ isStarredChannel ? "star" : "star outline" }
            color={ isStarredChannel ? "yellow" : "black"}
            />}
-                </span>
+                </div>
 
                 <Header.Subheader>{numUniqueUsers}</Header.Subheader>
             </Header>
 
-            <Header floated="right" >
+            <Header floated="right" className='MessageHeader_input' >
             <Input
             onChange={handleSearch}
             size="mini"
             placeholder="seach messages"
             icon="search"
             name="searchTerm"
-            
+            className='MessageHeader_input'
             />
             </Header>
 

@@ -103,7 +103,7 @@ class DirectMessage extends Component{
 
     return(
         <Menu.Menu className="menu">
-        <Menu.Item >
+        <Menu.Item style={{padding: "10px"}}>
             <span>
             <Icon name='mail'/> DIRECT MESSAGES 
             </span> {''}

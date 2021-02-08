@@ -4,7 +4,7 @@ import firebase from '../firebase'
 import {Menu,Icon,Modal,Input,Form,Header,Button} from 'semantic-ui-react'
 
 
-const Channels =({currentUser,currentChannel})=>{
+const Channels =({currentUser,currentChannel,toggleState})=>{
     useEffect(()=>{
         addListener()
        
@@ -77,7 +77,7 @@ const Channels =({currentUser,currentChannel})=>{
     return (
         <React.Fragment>
         <Menu.Menu>
-            <Menu.Item>
+            <Menu.Item style={{padding: "10px"}}>
                 <span>
                     <Icon name="exchange"/>
                     Channels
@@ -90,6 +90,7 @@ const Channels =({currentUser,currentChannel})=>{
             <ChannelItem 
             currentChannel={currentChannel}
             currentUser={currentUser}
+            toggleState={toggleState}
              />
         </Menu.Item>
         </Menu.Menu>

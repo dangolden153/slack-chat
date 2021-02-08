@@ -9,7 +9,8 @@ import FileUpload from './fileUpload'
 import './message.css'
 
 const Messages =({currentUser,privateChannel, currentChannel,usersRef,
-    numUniqueUsers,handleSearch,searchResult,searchTerm})=>{
+    toggleState,
+    numUniqueUsers,handleSearch,searchResult,searchTerm,openModal})=>{
 
 
     const [messageRef, setMessageRef] = useState(firebase.database().ref('message'))
@@ -110,6 +111,8 @@ const Messages =({currentUser,privateChannel, currentChannel,usersRef,
    
     return (
         <React.Fragment>
+
+            <div className='message__display'>
             <MessageHeader className='message__header'
             channalName={channalName(currentChannel)}
             numUniqueUsers={numUniqueUsers}
@@ -117,6 +120,8 @@ const Messages =({currentUser,privateChannel, currentChannel,usersRef,
             privateChannel={privateChannel}
             handleStarred={handleStarred}
             isStarredChannel={isStarredChannel}
+            openModal={openModal}
+            toggleState={toggleState}
             />
 
             <Segment className='message__chat'>
@@ -149,7 +154,7 @@ const Messages =({currentUser,privateChannel, currentChannel,usersRef,
             privateMessageRef={privateMessageRef}
             />
 
-            <div></div>
+          </div>
 
         </React.Fragment>
     )

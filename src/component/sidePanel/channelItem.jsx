@@ -81,6 +81,7 @@ class ChannelItem extends Component{
        this.props.setPrivateChannel(false)
        this.setState({channel: channel})
        this.clearNotifications()
+       this.props.toggleState()
     }
 
     clearNotifications=()=>{

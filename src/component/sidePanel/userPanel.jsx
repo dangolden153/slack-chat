@@ -53,64 +53,7 @@ const UserPanel =({currentUser})=>{
         },
     ]
 
-    // const handleChange=event=>{
-    //     const file = event.target.files[0]
-    //     const reader = new FileReader()
-
-    //     if (file){
-    //         reader.readAsDataURL(file)
-    //         reader.addEventListener('load', ()=>{
-    //             setPreviewImage(reader.result)
-    //             console.log(reader.result)
-    //         })
-    //     }
-    // }
-
-    // const uploadImage =()=>{
-    //     storageRef
-    //     .child(`avatars/user-${currentUser.uid}`)
-    //     .put(previewImage, metaData)
-    //     .then(snap => {
-    //         snap.ref.getDownloadURL().then(downloadUrl =>{
-    //             setUploadSetImage(downloadUrl, ()=>{
-    //                 chnageImage()
-    //             } )
-    //         })
-    //     })
-    // }
-
-    // const chnageImage =()=>{
-    //     currentUser
-    //     .updateProfile({
-    //        photoURL: uploadSetImage 
-    //     })
-    //     .then(()=>console.log('image uploaded sucessful'))
-    //     .catch(err => console.log(err))
-
-    //     userRef
-    //     .child(currentUser.uid)
-    //     .update({
-    //         avatar: uploadSetImage
-    //     })
-    //     .then(()=>console.log('still on image uploaded sucessful'))
-    //     .catch(err => console.log(err))
-    // }
-
-    // const handleCroppedImage =()=>{
-    //     if(avatarEditior){
-    //         g
-    //         })
-    //     }
-    // }
-
-    // avatarEditior.getImageScaledToCanvas().toBlob(blob =>{
-    //     let imageUrl = URL.createObjectURL(blob)
-    //     setcropImage(imageUrl)
-    //     setBlob(blob)
-    
-
-
-
+   
 
 
 
@@ -128,6 +71,7 @@ const UserPanel =({currentUser})=>{
                 <Header as='h2' floated='left' inverted style={{ margin: 0}}> 
                     <Icon name='code'/>
                     <Header.Content>Let's Chat</Header.Content>
+                   
                 </Header>
 
                 <Header as='h4'  inverted style={{ padding: '1.5em 0.25em'}}>

@@ -25,3 +25,71 @@ html{
     text-decoration: none;
   
   }
+
+  .message__container{
+    margin-left: 320px;
+  }
+
+  .media_ArrowIcon{
+    display: none;
+  }
+
+  .meta__panel{
+    width: 30%;
+    float: right;
+    margin-top: 20px;
+  }
+
+  .message__display{
+    width: 35vw;
+  }
+
+  .message_form{
+    padding: 10px 1em !important;
+  }
+
+  @media screen and (max-width: 800px){
+    .message__container{
+      display: none;
+      margin-left: unset;
+
+    }
+
+    .media_panel{
+      display: none;
+    }
+
+    .media_message{
+      display: block;
+    }
+
+    .MessageHeader_input{
+      display: none;
+    }
+
+    .message__display{
+      width: 91vw;
+    }
+
+    .meta__panel{
+      display: none;
+    }
+
+    .color__panel{
+      display: none;
+    }
+
+    .media_ArrowIcon{
+      display: block;
+      margin-right: 20px;
+    }
+
+    .message_form{
+      position: unset !important;
+      margin-left: unset !important;
+    }
+
+    .media__sidePanel_menu{
+      width: 93vw;
+    }
+  }

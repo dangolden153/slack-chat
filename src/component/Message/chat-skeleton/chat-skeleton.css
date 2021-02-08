@@ -13,7 +13,7 @@
     left: 0;
     width: 50%;
     height: 100%;
-    animation: sweep 2s;
+    animation: sweep 2s infinite;
     background-image: linear-gradient(
         to left,
         transparent,
