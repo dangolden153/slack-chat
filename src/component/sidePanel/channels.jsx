@@ -96,7 +96,7 @@ const Channels =({currentUser,currentChannel,toggleState})=>{
         </Menu.Menu>
 
         <Modal basic  open={modal} onClose={closeModal}>
-        <Modal.Header>Add a channel</Modal.Header>
+        <Modal.Header>Create a channel</Modal.Header>
             <Modal.Content>
                 <Form onSubmit={submitHandler} >
                     <Form.Field>

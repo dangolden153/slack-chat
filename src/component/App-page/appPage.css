@@ -94,4 +94,8 @@ html{
     .media__sidePanel_menu{
       width: 93vw !important;
     }
+
+    .media__sidePanel_segment{
+      margin: 0px 50px 0 15px !important;
+    }
   }

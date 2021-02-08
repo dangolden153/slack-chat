@@ -42,7 +42,7 @@ const UserPanel =({currentUser})=>{
 
         {
             key: 'avatar',
-            text: <span onClick={openModal}>change Avatar</span>,
+            text: <span onClick={openModal}>change profile pics</span>,
             
         },
 

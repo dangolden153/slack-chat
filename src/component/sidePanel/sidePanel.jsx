@@ -25,7 +25,7 @@ const SidePanel =({currentUser,setPrimaryColor,currentChannel,
             />
             
 
-            <Segment inverted style={{ margin: "0px 50px 0 15px"}}>
+            <Segment inverted style={{ margin: "0 20px"}} className="media__sidePanel_segment">
             <Comment.Group className="side__panel"  >
 
             <StarredChannel 
