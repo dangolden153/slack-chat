@@ -25,7 +25,7 @@ const MessageHeader =({channalName,numUniqueUsers,openModal,toggleState
            />}
                 </div>
 
-                <Header.Subheader>{numUniqueUsers}</Header.Subheader>
+                <Header.Subheader> { !privateChannel && numUniqueUsers}</Header.Subheader>
             </Header>
 
             <Header floated="right" className='MessageHeader_input' >

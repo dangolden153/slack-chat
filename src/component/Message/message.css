@@ -1,10 +1,16 @@
 .message_messg{
     height: 325px;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .message_header{
 
+}
+
+.messg__user{
+    display: flex;
+    align-items: center;
 }
 
 .message_form{
@@ -17,14 +23,58 @@ z-index: 200;
 }
 
 .message_self{
-    border-left: 2px solid orange;
-    padding-left: 8px;
+    /* border-left: 2px solid orange !important;
+    padding-left: 8px; */
     padding-top: 2.5em;
-    
+    display: flex;
+    align-items: center;
 }
 
-.menu{
-    padding-bottom: 1em;
+.users__content{
+    background:#4B0082;
+    padding: 4px 6px;
+    border-radius: 11px;
+    color: white !important;
+    max-width: 223px;
+    float: left !important;
+}
+
+.messg__content {
+    float: right !important;
+   
+    background: #eee;
+    padding: 4px 6px;
+    margin-right: 15px !important;
+    border-radius: 11px;
+    color: unset !important;
+    max-width: 223px;
+}
+
+.users_comment{
+    display: inline-block !important;
+    width: 100%;
+}
+
+.self_comment{
+    margin-left: 16px !important;
+    display: flex !important;
+    flex-direction: column;
+    align-items: self-start;
+    width: 100%;
+}
+
+.messg__author{
+    display: none;
+}
+
+.messg__image{
+    display: none !important;
+
+}
+
+.user__pics{
+    width: 3rem !important;
+    height: 3rem !important;
 }
 
 .message_image{
@@ -32,11 +82,21 @@ z-index: 200;
     height: 22rem;
     width: 23rem;
 }
+
+.image__sef{
+    float: right;
+}
+
 .user_typing{
     font-style: italic;
     font-weight: bold;
     margin-right: 3px;
 }
+
+.menu{
+    padding-bottom: 1em;
+}
+
 
 .typing{
     width: 5em;

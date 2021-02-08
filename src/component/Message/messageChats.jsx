@@ -118,7 +118,10 @@ class MessageChats extends Component{
               ))}
           </React.Fragment>) : null }  
           </div>
-            <Comment>
+
+
+
+        <Comment style={{display:"flex", flexDirection: "column"}}>
              
          {
       
