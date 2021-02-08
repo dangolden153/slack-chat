@@ -61,6 +61,7 @@ html{
 
     .media_message{
       display: block;
+      transform: translateY(28px);
     }
 
     .MessageHeader_input{
@@ -87,9 +88,10 @@ html{
     .message_form{
       position: unset !important;
       margin-left: unset !important;
+      transform: translateY(-5px);
     }
 
     .media__sidePanel_menu{
-      width: 93vw;
+      width: 93vw !important;
     }
   }

@@ -69,7 +69,7 @@ const MessageForm =({channel,user,messageRef,getMessagesRef,privateChannel,
 
 
     const submitMessage=(event)=>{
-        if (event.ctrlkey && event.keyCode === 13 ){
+       
             
       
         setIsLoading(true)
@@ -96,7 +96,7 @@ const MessageForm =({channel,user,messageRef,getMessagesRef,privateChannel,
         } else {
             setError({message: 'add a message'})
         }
-    }
+  
     }
 
 
@@ -147,6 +147,7 @@ const MessageForm =({channel,user,messageRef,getMessagesRef,privateChannel,
             <Input
             placeholder="write your message"
             label={<Button icon="smile" onClick={handleToggleEmoji}/>}
+            onKeyPress={event => event.key === 'Enter' ? submitMessage(event) : null }
             name="message"
             onKeyDown={handleKeyDown}
             ref={messageRefInput}

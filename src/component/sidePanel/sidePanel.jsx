@@ -11,12 +11,13 @@ const SidePanel =({currentUser,setPrimaryColor,currentChannel,
     
    
     return (
-        <div className="media__sidePanel_menu">
+        <div >
         <Menu
         vertical
         size='large'
         inverted
         fixed='left'
+        className="media__sidePanel_menu"
         style={{background: setPrimaryColor,marginLeft: '58px',    fontSize: '1.2rem',}}
         >
             <UserPanel
@@ -24,7 +25,7 @@ const SidePanel =({currentUser,setPrimaryColor,currentChannel,
             />
             
 
-            <Segment inverted style={{ margin: "0px 20px"}}>
+            <Segment inverted style={{ margin: "0px 50px 0 15px"}}>
             <Comment.Group className="side__panel"  >
 
             <StarredChannel 
