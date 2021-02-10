@@ -99,8 +99,22 @@ class MessageChats extends Component{
     }
 
 
+   loadSkeleton =loading=>{
+    if(this.state.messages.length > 0 && loading){
+        return    (<React.Fragment>
+            {[...Array(10)].map((_, i)=>(
+                <ChatSkeleton key={i} />
+            ))}
+        </React.Fragment>)
+
+    } else{
+        console.log('empty div')
+    }
+   }
 
 
+   
+   
 
 
    
@@ -112,13 +126,19 @@ class MessageChats extends Component{
         return(
             <React.Fragment>
           <div>
-          { messageIsLoading ? (<React.Fragment>
+             
+          {/* {messages.length > 0 && messageIsLoading   ? (<React.Fragment>
               {[...Array(10)].map((_, i)=>(
                   <ChatSkeleton key={i} />
               ))}
-          </React.Fragment>) : null }  
+          </React.Fragment>) : null }   */}
+
+          {/* {this.loadSkeleton(messageIsLoading)} */}
           </div>
 
+              
+                    
+                
 
 
         <Comment style={{display:"flex", flexDirection: "column"}}>
