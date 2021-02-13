@@ -75,7 +75,7 @@ const Login = ()=>{
         placeholder='email' name='email' type='email' onChange={e => setEmail(e.target.value)}  />
 
         <Form.Input fluid icon='lock' iconPosition='left' value={password}
-        placeholder='password' name='password' onChange={e => setPassword(e.target.value)} />
+        placeholder='password' name='password' type='password' onChange={e => setPassword(e.target.value)} />
 
     
     <Button disabled={loading} className={loading ? 'loading' : ''} type="submit" fluid color='violet'>submit</Button>
